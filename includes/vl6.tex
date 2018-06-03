@@ -1,0 +1,96 @@
+\newpage
+\subsection{Lösung der Cauchy'schen Randwertaufgabe für hyperbolische Systeme}
+\setcounter{equation}{4}
+Ausgangspunkt:
+\begin{align}
+\pd{\bm{x}}{z}(z,t)+\bm{B}(z)\pd{\bm{x}}{t}(z,t) = \bm{C}(z)\bm{x}(z,t)  \label{eq:4-5}
+\end{align}
+mit $\bm{x}(z,t) \in \R^n$ und hyperbolisch, da EW von $\bm{B}(z)$ reell und verschieden.
+\\\\
+Ziel: Berechnung er Lösung $(z,t)\mapsto\bm{x}(z,t)$ aus bekanntem Verlauf $t\mapsto\bm{x}(z_0,t)$ (z.B. $z_0=l$)
+\\\\
+Erinnerung: Eigenwerte $\lambda_1(z),...,\lambda_n(z)$ der Matrix $\bm{B}(z)$ mit $z=[0,l]$ entprechen Anstiegen der $\underbrace{\textrm{Charakteristiken}}_{\textrm{char. Projektion}}$, da System hyperbolisch
+\\\\
+Spannen die Eigenvektoren $\bm{r}_1(z),...,\bm{r}_n(z)$ von $\bm{B}(z)$ den $\R^n$ auf und $\bm{B}(z)$ ist mittels $\bm{T}=(\bm{r}_1(z),...,\bm{r}_n(z))$ diagonalisierbar:
+\begin{align*}
+\bm{\Lambda}(z)=\bm{T}^{-1}(z)\bm{B}(z)\bm{T}(z) = \begin{pmatrix}
+\lambda_1(z) & & 0 \\ & \ddots & \\ 0 & & \lambda_n(z)
+\end{pmatrix}
+\end{align*}
+Transformation von \eqref{eq:4-5} auf hyperbolische Normalform durch Wechsel der abhängigen Veränderlichen
+\begin{align*}
+\colorboxed{red}{\bm{x}(z,t) = \bm{T}(z)\tilde{\bm{x}}(z,t)}
+\end{align*}
+Einsetzen in \eqref{eq:4-5} liefert die hyperbolische Normalform
+\begin{align*}
+&\bm{T}(z)\pd{\tilde{\bm{x}}}{z}(z,t)+\pd{\bm{T}(z)}{z}\tilde{\bm{x}}(z,t)+\bm{B}(z)\bm{T}(z)\pd{\tilde{\bm{x}}}{t}(z,t) = \bm{C}(z)\bm{T}(z)\tilde{\bm{x}}(z,t) \\
+\Leftrightarrow \quad &\pd{\tilde{\bm{x}}}{z}(z,t)+\bm{T}^{-1}(z)\pd{\bm{T}(z)}{z}\tilde{\bm{x}}(z,t)+\underbrace{\bm{T}^{-1}(z)\bm{B}(z)\bm{T}(z)}_{=:\bm{\Lambda}(z)}\pd{\tilde{\bm{x}}}{t}(z,t) = \bm{T}^{-1}(z)\bm{C}(z)\bm{T}(z)\tilde{\bm{x}}(z,t) \\
+\Leftrightarrow \quad & \pd{\tilde{\bm{x}}}{z}(z,t) + \bm{\Lambda}(z)\pd{\tilde{\bm{x}}}{t}(z,t)=\underbrace{\left(\bm{T}^{-1}(z)\bm{C}(z)\bm{T}(z)-\bm{T}^{-1}(z)\right)}_{=:\tilde{\bm{C}}}\tilde{\bm{x}}(z,t)
+\end{align*}
+\begin{align}
+\Leftrightarrow \quad \colorboxed{red}{\pd{\tilde{\bm{x}}}{z}(z,t) + \bm{\Lambda}(z)\pd{\tilde{\bm{x}}}{t}(z,t)= \tilde{\bm{C}}\tilde{\bm{x}}(z,t)}
+\end{align}
+schön, weil
+\begin{align*}
+& \tilde{x}_1'+\lambda_1\dot{\tilde{x}}_1=\tilde{c}_1^{\mathrm{T}}\tilde{\bm{x}} & \tilde{c}_i^{\mathrm{T}} \quad i\textrm{-te Zeile von }\tilde{\bm{C}}\\
+& \tilde{x}_2'+\lambda_2\dot{\tilde{x}}_2=\tilde{c}_2^{\mathrm{T}}\tilde{\bm{x}} \\
+& \qquad \vdots \\
+& \tilde{x}_n'+\lambda_n\dot{\tilde{x}}_n=\tilde{c}_n^{\mathrm{T}}\tilde{\bm{x}}
+\end{align*}
+Charakteristik durch $(z_0,t_0)$:
+\begin{align}
+\colorboxed{red}{z\mapsto t_i(z;z_0)+t_0 \quad \mathrm{mit} \quad \frac{\d t_i}{\d z}(z;z_0) = \lambda_i(z)}
+\end{align}
+Ableitung von $\tilde{\bm{x}}_i$ $i=1,...,n$ entlang der zugehörigen Charakteristik durch $(z_0,t_0)$
+\begin{align}
+\pd{\tilde{x}_i}{z}(z,t_i(z;z_0)+t_0)+\lambda_i(z)\pd{\tilde{x}_i}{t}(z,t_i(z;z_0)+t_0) = \tilde{c}_i^{\textrm{T}}(z)\tilde{x}_i(z,t_i(z;z_0)+t_0)-\tilde{x}_i(z_0,t_0)
+\end{align}
+Integration $\int_{z_0}^z$ liefert:
+\begin{align*}
+\tilde{x}_i(z,t_i(z;z_0)+t_0)-\tilde{x}_i(z_0,t_0) = \int_{z_0}^z\tilde{c}_i^{\textrm{T}}(\xi)\tilde{x}_i(\xi,t_i(\xi;z_0)+t_0)-\tilde{x}_i(z_0,t_0)\d \xi
+\end{align*}
+da $t=t_i(z;z_0)+t_0$
+\begin{align}
+\label{eq:4-9}
+\tilde{x}_i(z,t)-\tilde{x}_i(z_0,t-t_i(\xi;z_0)) = \int_{z_0}^z\tilde{c}_i^{\textrm{T}}(\xi)\tilde{x}_i(\xi,t)-\tilde{x}_i(z_0,t_0)\d \xi
+\end{align}
+\begin{satz}(ohne Beweis)
+Das System \eqref{eq:4-9} von Integralgleichungen besitzt für beliebige beschränkte Randtrajektorien $t \mapsto \tilde{x}_i(z_0,t)$ eine eindeutige Lösung $(z,t) \mapsto \tilde{\bm{x}}(z,t)$. 
+\end{satz}
+Mit $\bm{x}(z,t)=\bm{T}(z)\tilde{\bm{x}}(z,t)$ folgt die Lösung der Cauchyschen Randwertaufgabe.
+
+Numerische Lösung durch Diskretisierung des Integrals (Euler-Schema)
+\begin{enumerate}
+\item Zerlegung von $[0, l]$ in $N+1$ Intervalle $[z_k,z_{k+1}]$ der Länge $\Delta z$ \[\tilde{x}_i(z_{k+1},t)-\tilde{x}_i(z_{k},t-t_i(z_{k+1};z_k)) = \int_{z_k}^{z_{k+1}}\tilde{c}_i^{\textrm{T}}(\xi)\tilde{\bm{x}}(\xi,t-t_i(z_{k+1};\xi))\d \xi \]
+\item Approximation $t_i(z_{k+1};z_k) \approx \Delta z \lambda_i(z)$ \[ \int_{z_k}^{z_{k+1}}\tilde{c}_i^{\textrm{T}}(\xi)\tilde{\bm{x}}(\xi,t-t_i(z_{k+1};\xi))\d \xi \approx \Delta z \tilde{c}_i^{\textrm{T}}(z_k)\tilde{\bm{x}}(z_k,t-t_i(z_{k+1},z_k)) \]
+\begin{align}
+\Rightarrow \tilde{x}_i(z_{k+1},t) = \tilde{x}_i(z_k,t-\Delta z \lambda_i(z_k)) + \Delta z \tilde{c}_i^{\textrm{T}}(z_k)\tilde{\bm{x}}(z_k,t-\Delta z \lambda_i(z_k))
+\end{align}
+\end{enumerate}
+Spezialfall: $\tilde{c}_i^{\textrm{T}}=0$ Lösung ergibt sich durch eien Zeitverschiebung der Randtrajektorie (Totzeiten, Prädiktion)
+\begin{bsp}{Elektrische Übertragungsleitung}
+\begin{align*}
+\pd{u}{z}(z,t)+L\pd{i}{t}(z,t)+Ri(z,t)&=0 \\
+\pd{i}{z}(z,t)+C\pd{u}{t}(z,t)+Gu(z,t)&=0
+\end{align*}
+mit $\bm{x}(z,t)=\begin{pmatrix}
+u(z,t) \\ i(z,t)
+\end{pmatrix}$
+\begin{align*}
+\pd{\bm{x}}{z}(z,t)+\bm{B}\pd{\bm{x}}{t}(z,t)+\bm{C}\bm{x}(z,t)&=0
+\end{align*}
+mit $\bm{B}=\begin{pmatrix}
+0 & L \\ C & 0
+\end{pmatrix}$ und $\bm{C}=\begin{pmatrix}
+0 & R \\ G & 0
+\end{pmatrix}$
+\begin{itemize}
+\item[] Vorgabe $\bm{x}(z_0,t) =:\bm{x}_0(t)$
+\item[] gesucht: $\bm{x}(0,t) =: u_0(t)$
+\item[] Eigenwerte von $\bm{B}:\lambda_1 = \tau \quad \lambda_2 = -\tau$ mit $\tau = \sqrt{LC}$
+\item[] Eigenvektoren von $\bm{B}:\bm{r}_1 = \begin{pmatrix}\sqrt{L} \\ \sqrt{C}\end{pmatrix} \quad \bm{r}_2 = \begin{pmatrix}\sqrt{L} \\ -\sqrt{C}\end{pmatrix} $
+\item[] Transformation: $\bm{x}(z,t)=\bm{T}(z)\tilde{\bm{x}}(z,t)$ \newline mit  $\bm{T}(z) = \begin{pmatrix}\sqrt{L} &\sqrt{L} \\ \sqrt{C}&-\sqrt{C}\end{pmatrix}$ und $\bm{T}^{-1}(z) =\frac{1}{2\sqrt{LC}} \begin{pmatrix}\sqrt{C} &\sqrt{L} \\ \sqrt{C} &-\sqrt{L}\end{pmatrix}$
+\item[] hyperbolische Normalform: \[ \]
+\end{itemize}
+
+\end{bsp}

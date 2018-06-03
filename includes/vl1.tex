@@ -1,0 +1,115 @@
+\newpage
+\section{Modellierung von Systemen mit verteilten Parametern}
+\subsection{Modellierung in ortsfesten Koordinaten}
+\label{sec:modortsfest}
+\subsubsection{Bilanzgleichungen im $\R^3$}
+\begin{itemize}
+\item Medien mit fester Lage und Ausdehnung $\Omega \in \R^3$ (Berandung $\delta \Omega$) im Raum
+\item Addressierung eines Punktes durch Ortsvektor $\vec{z}\in \Omega$
+\item Bilanzierung der Speichergröße $S$ mit Dichtefunktion $s$ über beliebiges raumfestes Volumen $V \in \Omega$ mit Berandung $\delta \Omega$
+\end{itemize}
+Speichergrößenwert in V:
+\begin{align}
+\label{eq:speichergroesse}
+S_V = \int_V s(\vec{z},t) \d V
+\end{align}
+Zeitableitung:
+\begin{align}
+\label{eq:diffspeichergroesse}
+\dot{S}_V = \int_V \frac{\partial s(\vec{z},t)}{\partial t}\d V
+\end{align}
+Ursache der Änderung von $S_V$:
+\begin{itemize}
+\item Quellendichte $p$ im Inneren von $V$
+\item Zustrom über den Rand (gerichtete Flussdichte $\vec{q}$
+\end{itemize}
+ \begin{align}
+ \label{eq:ursache}
+ \frac{dS_V}{dt} = \int_V p(\vec{z},t)dV - \int_{\delta V} \left\langle  \vec{q}(\vec{z},t),\vec{\nu}_{\delta V}(\vec{z})\right\rangle \d  \delta V
+ \end{align}
+Aus dem Integralsatz von Gauss folgt:
+ \begin{align}
+ \label{eq:satzvongauss}
+  \int_{\delta V} \left\langle  \vec{q}(\vec{z},t),\vec{\nu}_{\delta V}(\vec{z})\right\rangle \d \delta V = \int_V \mathrm{div} \vec{q}(\vec{z},t) \d V
+ \end{align}
+ also:
+ \begin{align*}
+ \frac{dS_V}{dt} = \int_V p(\vec{z},t) - \mathrm{div} \vec{q}(\vec{z},t) \d V
+ \end{align*}
+ mit \ref{eq:speichergroesse} und \ref{eq:diffspeichergroesse}
+ \begin{align}
+ \label{eq:pdefinal}
+ 0 =  \int _V \left( \frac{\partial s(\vec{z},t)}{\partial t}-p(\vec{z},t)+\mathrm{div} \vec{q}(\vec{z},t) \right) \d V
+ \end{align}
+ Da Volumen beliebig muss der Integrand verschwinden
+ \begin{align}
+ 0 = \frac{\partial s(\vec{z},t)}{\partial t}-p(\vec{z},t)+\mathrm{div} \vec{q}(\vec{z},t) 
+ \end{align}
+ \begin{itemize}
+ \item Konkrete Aufgabnstellung definiert Zusammenhang zw. $s$ und $q$
+\item Zusätzlich zu stellen: Randbedingungen zur pDgl.
+\item Klassifikation der Randbedingungen: 
+\subitem Vorgabe der Speichergröße auf $\delta \Omega \rightarrow $ Dirichlet
+\subitem Vorgabe des Flusses auf $\delta \Omega \rightarrow $ Neumann
+\subitem Funktionaler Zusammenhang von $s$ und $q$ auf $\delta \Omega \rightarrow$ gemischte RB
+ \end{itemize}
+ \subsubsection{Bilanzgleichungen im $\R^1$}
+ \begin{itemize}
+ \item Flussdichte $\vec{q}(\vec{z},t) \rightarrow$ Skalar $q(z,t) \in \R$
+ \item Volumen $V \rightarrow$ Intervall $[a,b]$
+ \item Randintegral \ref{eq:satzvongauss} $\int_{\delta V} \left\langle  \vec{q}(\vec{z},t),\vec{\nu}_{\delta V}(\vec{z})\right\rangle \d  \delta V = q(b,t)-q(a,t) = \int_b^a \frac{\partial q(z,t)}{\partial z}\d z$
+ \end{itemize}
+ also statt \ref{eq:pdefinal}
+ \begin{align}
+ \int_b^a \left( \frac{\partial s(z,t)}{\partial t}-p(z,t)+\frac{\partial q(z,t)}{\partial t} \right) \d z = 0
+ \end{align}
+ pDgl.:
+ \begin{align}
+ \frac{\partial s(z,t)}{\partial t}-p(z,t)+\frac{\partial q(z,t)}{\partial t}
+ \end{align}
+ Faustregel: Zu einer pDgl. $n$-ter Ordnung im Ort müssen $n$ unabhängige Randbedingungen vorgegeben werden.
+ \subsection{Modellierung in materialfesten Koordinaten}
+ \begin{itemize}
+ \item deformierbare Medien in der Mechanik
+ \item materialfestes Koordinatensystem 
+ \subitem $\rightarrow$ Addressierung eines Materialpunktes $\vec{z}$ durch Ortsvektor $\vec{x}(\vec{z},t_0)$ in Referenzkonfiguration, die zue inem Zeitpunkt $t_0$ angenommen wird: $\vec{z}=\vec{x}(\vec{z},t_0)$
+ \item im deformierten Zustand $\vec{z}\neq\vec{x}(\vec{z},t_0)$
+ \item Bilanzierung in materialfesten Volumen ( Dichtefunktionen $p,s,\vec{q}$ müsssen in materialfesten Koordinaten gegeben sein)
+ \item Gleichungen aus \ref{sec:modortsfest} gelten in materialfesten Koordinaten
+ \end{itemize}
+ \subsection{Modellierung in raumfesten Koordinaten durch Bilanzierung über materialfestem Volumen}
+ \subsubsection{im $\R^3$}
+ Ziel: Modellierung bewegter Medien in raumfestem Bezugssystem (z.B. Fluidmechanik)
+ \begin{itemize}
+  \item Addressierung eines Punktes $P$ des Kontinuums $\Omega$ durch den Ortsvektor $\vec{r}$ ine einer Referenzkonfiguration (Materialkoordinaten)
+  \item Position von $P$ zum Zeitpunkt t (Raumkoordinaten): $\vec{z}(\vec{r},t) = \phi(\vec{r},t)$ 
+ \end{itemize}
+
+Annahme: $\phi$ ist zu jedem Zeitpunkt bezüglich $\vec{r}$ umkehrbar (jedem Raumpunkt entspricht eindeutig ein Matrialpunkt)
+\begin{align*}
+\vec{r} = \psi(\vec{z},t)
+\end{align*}
+Geschwindigkeit des Materialpunktes $P$:
+\begin{align*}
+\dot{\vec{z}}(\vec{r},t) = \frac{\partial \phi}{\partial t}(\vec{r},t)
+\end{align*}
+Zuordnung der Geschwindigkeiten zu einem Raumpunkt $\vec{z}$:
+\begin{align*}
+\vec{v}(\vec{z},t) := \dot{\vec{z}}(\psi(\vec{z},t),t)
+\end{align*}
+\begin{itemize}
+\item Modellierung durch Bilanzierung einer Speichergröße $S_{V_t}$ (Dichte: $s(\vec{z},t)$) über ein materialfestes Volumen $V$, das zum Zeitpunkt $t$ das Volumen $V_t$ einnimmt:
+\end{itemize}
+\begin{align*}
+S_{V_t} = \int_{V_t} s(\vec{z},t) \d V_t
+\end{align*}
+Integrationsgebiet $V_t$ nicht konstant! 
+
+Deshalb wird die zeitliche Änderung von $S_{V_t}$ mit dem Transportsatz von Reynolds beschrieben:
+\begin{align*}
+\dot{S}_{V_t} = \int_{V_t} \frac{\partial s(\vec{z},t)}{\partial t}\d V_t + \int_{\delta V_t}s(\vec{z},t) \left\langle \vec{\nu}_{\delta V_t}(\vec{z},t),\vec{v}(\vec{z},t) \right\rangle \d \delta V_t
+\end{align*}
+mit der Notation aus \ref{sec:2.1} ergitb sich:
+\begin{align}
+\frac{\partial s(\vec{z},t)}{\partial t}-p(\vec{z},t)+\mathrm{div}\vec{q}(\vec{z},t)+\mathrm{div}\vec{s}(\vec{z},t)\vec{v}(\vec{z},t) = 0
+\end{align}

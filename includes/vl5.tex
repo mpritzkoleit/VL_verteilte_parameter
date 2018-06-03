@@ -1,0 +1,88 @@
+\newpage
+\section{Steuerungsentwurf}
+\subsection{Motivation Steuerungsentwurf}
+$\Rightarrow$ Folien
+
+\subsection{(Differentielle) Flachheit konzentriertparametrischer Systeme}
+Modell Feder-Masse-Schwinger 
+\begin{align*}
+m\ddot{x}(t)+\sigma \frac{x(t)}{l} = u(t)
+\end{align*}
+Stellgröße $u$ ergibt sich direkt aus der vertikalen Auslenkung $x$ und deren zweiter Ableitung $\ddot{x}$.
+Damit ist $x$ ein flacher Ausgang $y$. Mithin gilt für die Steuerung:
+\begin{align*}
+u_{ref}(t) =  m \ddot{y}_{ref}(t) +\frac{\sigma}{l}y_{ref}(t)
+\end{align*}
+Trajektorienplanung für $y_{ref}: t \mapsto y_{ref}(t)$ muss zweimal stetig differenzierbar sein.
+\begin{bsp}
+\begin{align*}
+y_{ref}(t) = \begin{cases} y_0 \quad t<0 \\ y_0 +(y_1-y_0)\varphi(t/t^*) \quad t\in [0,t^*] \\ y_1 \quad t>t^* \end{cases}
+\end{align*}
+mit $\varphi(\tau) = 10 \tau^3-15\tau^4+6\tau^5$ für Übergang von $y_0$ auf $y_1$, innerhalb der Zeit $t^*$.
+
+\textcolor{red}{Abbildung fehlt}
+
+Reglerentwurf: 
+\begin{enumerate}
+\item Vorgabe einer Fehlerdynamik:
+
+\[\ddot{\tilde{y}}(t)+k_1\dot{\tilde{y}}(t)+k_0 \tilde{y}(t)= 0, \quad\tilde{y}=y-y_{ref}\]
+
+\[\ddot{y}=\ddot{y}_{ref}-k_1\dot{\tilde{y}}-k_0 \tilde{y}\]
+
+\item ins Modell eingesetzt:
+\begin{align*}
+u=m(\ddot{y}_{ref}-k_1\dot{\tilde{y}}-k_0 \tilde{y})+\frac{\sigma}{l}y
+\end{align*}
+\end{enumerate}
+\end{bsp}
+Verteiltparametrisches Beispiel:
+
+\begin{bsp}Schwingende Saite (Modellbildung s. Folie)
+\begin{align*}
+\rho\pd[2]{x}{t^2}(z,t)-\sigma\pd[2]{x}{z^2}(z,t) = 0 \\
+\textrm{mit RB: } x(0,t) = 0, \quad \sigma \pd{x}{z}(l,t)=u(t)
+\end{align*}
+\begin{itemize}
+\item[] Flacher Ausgang: $y(t) = \pd{x}{z}(0,t)$ aus Grenzübergang Modellbildung (s. Folie)
+
+\item[] Weiteres Vorgen: Wenn $y$ bekannt ist, können $x(0,t)$ (aus RB) und $\pd{x}{z}(0,t)$ (aus Def. von $y$) berechnet werden.
+
+\item[] Probleme:
+
+\item Rekursion wie im konzentriertparametrischen Fall zur Berechung der werte am rechten Rand $(z=l)$ nicht möglich
+\item stattdessen: Berechnung der Lösung der pDgl. aus bekannten Randtrajektorien für $t\mapsto\,x(0,t)$ und $t\mapsto\,\pd{x}{z}(0,t)$ nötig.
+\item[$\Rightarrow$] Cauchy'sche Randwertaufgabe (sämtliche RB am gleichen Rand vorgegeben)
+\item [$\Rightarrow$] Lösung der Randwertaufgabe und Auswertung der physikalischen Randbedingungen liefert Stellgrößenverlauf.
+\end{itemize}
+\end{bsp}
+Thema im Folgenden: Transformation einer gegebenen RWA auf eine Cauchy'sche RWA durch Einführung eines flachen Ausgangs.
+
+\subsection{Flacher Ausgang für eine Klasse von Randwertaufgaben (RWA)}
+\setcounter{equation}{0}
+Ausgangspunkt: $n$ pDgl. 1. Ordnung bezüglich $z$
+\begin{align}
+&\pd{\bm{x}}{z}(z,t) = \bm{f}(\bm{x}(z,t),\ddot{\bm{x}}(z,t),\ddot{\bm{x}}(z,t),...) \\
+\hat{=}&\pd[n]{x}{z^n}(z,t)=f\Big(x(z,t),\pd{x}{z}(z,t),...,\pd[n-1]{x}{z^{n-1}}(z,t),\dot{x}(z,t),\ddot{x}(z,t),...\Big) \tag{1'}
+\end{align}
+Randbedingungen:
+Modell $n$-ter Ordnung benötigt $n$ Randbedingungen (RB) 
+\begin{enumerate}
+\item vollständig gesteuerte RB 
+\item[] o.B.d.A. bei $z=0$: 
+\item[] $m$ dieser RB mit $m$ Stelleingriffen in $\bm{u}=(u_1,...,u_m)$ bei z=0:
+\item[] $\bm{R}_0(\bm{u}(t),\bm{x}(0,t),\dot{\bm{x}}(0,t,),...)=0$ mit
+ \[\bm{R}_0 = (R_{0,1},....,R_{0,m})^\textrm{T} \tag{2a} \label{eq:4-2a}\]können nach $\bm{u}$ aufgelöst werden, dh. $\rang(\pd{\bm{R}_0}{\bm{u}})=m$
+\item[]Interpretation: $\bm{x}(0,t)$ ist flacher Ausgang des Systems \eqref{eq:4-2a}, denn $\bm{u}$ lässt sich aus $\bm{x}(0,t)$ und dessen Ableitungen integrallos berechnen.
+\item vollständig differentiell paramterierbare RB 
+\item[] o.B.d.A. bei $z=l$:
+\item[] $n-m$ RB bei $z = l$ 
+\item[] $\bm{R}_l(\bm{x}(l,t),\dot{\bm{x}}(l,t,),...)=0$ mit
+ \[\bm{R}_l = (R_{l,1},....,R_{l,n-m})^\textrm{T} \tag{2b} \label{eq:4-2b}\] können nach $\bm{x}$ aufgelöst werden, dh. $\rang(\pd{\bm{R}_l}{\bm{x}})=n-m$
+ \item[] Annahme: es existiert ein $\bm{y}(t)=(y_1(t),...,y_{m}(t))^\textrm{T}$ mit 
+ \item[] \[\bm{y}(t) = \bm{g}\Big( \bm{x}(l,t),\dot{x}(l,t),...\Big) \tag{3} \label{eq:4-3}\]
+ \item[] sodass gilt:
+ \item[] \[\bm{x}(l,t) = \bm{h}\Big( \bm{y}(t),\dot{y}(t),...\Big)\tag{4} \label{eq:4-4}\]
+ \item[] Interpretation $\bm{y}$ ist flacher Ausgang des konzentriertparametirischen Systems \eqref{eq:4-2b}
+\end{enumerate}
+\textcolor{red}{Abbildung fehlt}

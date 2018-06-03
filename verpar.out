@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.2}{Modellierung von Systemen mit verteilten Parametern}{}% 1
+\BOOKMARK [2][-]{subsection.2.1}{Modellierung in ortsfesten Koordinaten}{section.2}% 2
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Bilanzgleichungen im R3}{subsection.2.1}% 3
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Bilanzgleichungen im R1}{subsection.2.1}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Modellierung in materialfesten Koordinaten}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{Modellierung in raumfesten Koordinaten durch Bilanzierung \374ber materialfestem Volumen}{section.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.3.1}{im R3}{subsection.2.3}% 7
+\BOOKMARK [3][-]{subsubsection.2.3.2}{im R1}{subsection.2.3}% 8
+\BOOKMARK [1][-]{section.3}{Klassifikation partieller Differentialgleichungen}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Charakteristika von Gleichungen erster Ordnung}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Charakteristiken und Klassifikation von Gleichungssystemen 1. Ordnung}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.3}{Klassifikation und Charakteristiken von Gleichungen 2. Ordnung}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Steuerungsentwurf}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Motivation Steuerungsentwurf}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{\(Differentielle\) Flachheit konzentriertparametrischer Systeme}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.3}{Flacher Ausgang f\374r eine Klasse von Randwertaufgaben \(RWA\)}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.4}{L\366sung der Cauchy'schen Randwertaufgabe f\374r hyperbolische Systeme}{section.4}% 17

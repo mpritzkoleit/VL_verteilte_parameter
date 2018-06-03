@@ -1,0 +1,66 @@
+\documentclass[ngerman]{article}
+\synctex=1
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage[a4paper]{geometry}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{bm}
+\newtheorem{defi}{Definition}[section]
+\newtheorem{satz}{Satz}[section]
+\newtheorem{bsp}{Beispiel}[section]
+% Kommentare beginnen mit dem Zeichen "%"
+
+% Einstellung die verhindert, dass unschöne Rahmen um Links gezogen werden
+\hypersetup{
+    colorlinks = true, % false bedeutet Rahmen (nicht schön)
+    linkcolor={red!20!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black},
+}
+% Syntax: \colorboxed[<color model>]{<color specification>}{<math formula>}
+\newcommand*{\colorboxed}{}
+\def\colorboxed#1#{%
+  \colorboxedAux{#1}%
+}
+\newcommand*{\colorboxedAux}[3]{%
+  % #1: optional argument for color model
+  % #2: color specification
+  % #3: formula
+  \begingroup
+    \colorlet{cb@saved}{.}%
+    \color#1{#2}%
+    \boxed{%
+      \color{cb@saved}%
+      #3%
+    }%
+  \endgroup
+}
+% Abkürzungen einführen (alphabetische Sortierung empfehlenswert):
+
+\newcommand{\ad}{\mathrm{ad}}
+% renew weil \d schon belegt ist
+\renewcommand{\d}{\mathrm{d}} % aufrechtes d (für Differentialformen)
+\newcommand{\NV}{{\cal N}\,}
+\newcommand{\rang}{\mathrm{rang}}
+\newcommand{\im}{\mathrm{im}}
+\newcommand{\spann}{\mathrm{span}}
+\newcommand{\R}{\mathbb{R}} % doppeltes R
+\newcommand*{\pd}[3][]{\ensuremath{\frac{\partial^{#1} #2}{\partial #3}}}
+
+
+% Hier beginnt das eigentliche Dokument
+\begin{document}
+\input{includes/titlepage}
+\tableofcontents
+\setcounter{section}{1}
+\input{includes/vl2}
+\input{includes/vl3}
+\input{includes/vl4}
+\input{includes/vl5}
+\input{includes/vl6}
+\end{document}
