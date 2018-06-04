@@ -90,7 +90,17 @@ mit $\bm{B}=\begin{pmatrix}
 \item[] Eigenwerte von $\bm{B}:\lambda_1 = \tau \quad \lambda_2 = -\tau$ mit $\tau = \sqrt{LC}$
 \item[] Eigenvektoren von $\bm{B}:\bm{r}_1 = \begin{pmatrix}\sqrt{L} \\ \sqrt{C}\end{pmatrix} \quad \bm{r}_2 = \begin{pmatrix}\sqrt{L} \\ -\sqrt{C}\end{pmatrix} $
 \item[] Transformation: $\bm{x}(z,t)=\bm{T}(z)\tilde{\bm{x}}(z,t)$ \newline mit  $\bm{T}(z) = \begin{pmatrix}\sqrt{L} &\sqrt{L} \\ \sqrt{C}&-\sqrt{C}\end{pmatrix}$ und $\bm{T}^{-1}(z) =\frac{1}{2\sqrt{LC}} \begin{pmatrix}\sqrt{C} &\sqrt{L} \\ \sqrt{C} &-\sqrt{L}\end{pmatrix}$
-\item[] hyperbolische Normalform: \[ \]
+\item[] hyperbolische Normalform: \[ \pd{\tilde{\bm{x}}}{z}(z,t)+\tau\begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix}\pd{\tilde{\bm{x}}}{t}=\frac{\tau}{2}\begin{pmatrix}-\alpha \tilde{x}_1+\beta\tilde{x}_2 \\ -\beta \tilde{x}_1+\alpha\tilde{x}_2\end{pmatrix} \] 
+\[\alpha=\frac{R}{L}+\frac{G}{C} \quad \beta = \frac{R}{L}-\frac{G}{C} \]
+\item[] Charakteristiken
+\begin{align*}
+(z_0,t_0) &\mapsto t_1(z;z_0)+t_0 \quad \mathrm{mit} \quad \frac{\d t_1}{\d z}(z;z_0)=\tau \\
+(z_0,t_0) &\mapsto t_2(z;z_0)+t_0 \quad \mathrm{mit} \quad \frac{\d t_2}{\d z}(z;z_0)=-\tau \\
+\end{align*}
+auf den Charakteristiken gilt: 
+\begin{align*}
+\tilde{x}_1(z,t) = \tilde{x}_1(z_0,t-\tau(z-z_0))+\int_{z_0}^z\left(-\alpha\tilde{x}_1(\xi,t-\tau(z-\xi))+\beta\tilde{x}_2(\xi,t-\tau(z-\xi))\right) \\
+\tilde{x}_2(z,t) = \tilde{x}_2(z_0,t+\tau(z-z_0))+\int_{z_0}^z\left(-\beta\tilde{x}_1(\xi,t+\tau(z-\xi))+\alpha\tilde{x}_2(\xi,t+\tau(z-\xi))\right)
+\end{align*}
 \end{itemize}
-
 \end{bsp}

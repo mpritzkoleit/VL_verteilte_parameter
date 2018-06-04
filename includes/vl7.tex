@@ -1,0 +1,115 @@
+\newpage
+\subsection{Lösung der Cauchy'schen Randwertaufgabe für parabolische Systeme}
+\subsubsection{Mathematische Vorbereitungen}
+$\Gamma$-Funktion: Verallgemeinerung der Fakultät für nicht ganzzahlige Argumente.
+
+$\Gamma(i+1)=i! \quad i \in \mathbb{N}$ genügt der Funktionalgleichung:
+\begin{align*}
+\Gamma(x+1)=x\Gamma(x) \qquad \Gamma(1)=1
+\end{align*}
+\begin{defi} \textcolor{red}{Gevrey-Klasse} und \textcolor{red}{-Ordnung}. Die Funktion $f$ sei auf dem Intervall $\Omega \in \R$ definiert und dort beliebig oft differenzierbar. Dann gehört $f$ auf $\Omega$ zur kleinen Gevrey-Klasse $G_\alpha(\mathcal{I})$ der Ordnung $\alpha$, wenn zu jedem $\gamma>0$ eine Konstante $M$ derart existiert, dass gilt:
+\begin{align*}
+\sup_{t\in\mathcal{I}}{\pd[i]{f}{t^i}(t)<M\gamma^i\Gamma(\alpha i+1)}
+\end{align*}
+(alle Ableitungen für alle $t$ dürfen die Schranke (rechte Seite) nicht überschreiten)
+\end{defi}
+\begin{bsp}
+\begin{align*}
+\varphi_\gamma =  \begin{cases}0 & t<0 \\ \frac{1}{2}\left(1+\tanh\left(\frac{2t-1}{(4t(1-t))^\sigma}\rigt)\right) & t \in[0,1] \\1 &t>1 \end{cases}
+\end{align*}
+gehört zur kleinen Gevrey-Klasse der Ordnung $\alpha$ für $\sigma>\frac{1}{\alpha-1}$
+
+Bei Interpolation treten in den Ableitungen bestimmter Ordnung in den Randpunkten Sprünge auf. Hier muss aber auch bei der $\infty.$ Ableitung kein Sprung sein.
+\end{bsp}
+\subsubsection{Existenz der Lösung}
+Ausgangspunkt: homogenes lineares pDgl-System aus $n$ Gleichungen 1. Ordnung
+\begin{align}
+\pd{\bm{x}}{z}(z,t)+\bm{B}(z)\pd{\bm{x}}{t}(z,t) = \bm{C}(z)\bm{x}(z,t)  \quad \bm{x} \in \R^n \label{eq:4-11}
+\end{align}
+Ziel: Berechnung der Lösung $(z,t)\mapsto\bm{x}(z,t)$ aus bekanntem Verlauf $t\mapsto \tilde{x}(z_0,t)$ mit bspw. $z_0=l$
+
+Annahme: $\bm{B}$ hat nur einen Eigenwert $\lambda=0$ der algebraischen Vielfachheit $n$ 
+
+$\Rightarrow$ parabolisches System
+
+geometrische Vielfachheit des Eigenwertes $\lambda$ sei $M=n-rang(\bm{B})$ 
+
+$\Rightarrow$ $M$ Eigenvektoren zur Matrix $\bm{B}$
+
+Folge: Es existiert eine matrixwertige Funktion
+\begin{align*}
+z\mapsto\bm{T}(z) \quad \bm{J}(z)=\bm{T}^{-1}(z)\bm{B}(z)\bm{T}(z)
+\end{align*}
+mit $\bm{J}$ in Jordan-Normalform
+
+\begin{satz}\eqref{eq:4-11} genügen den obigen Annahmen. Sei $\hat{m}$ die maximale in $\bm{J}(z)$ auftretende Länge eines Jordan-Blockes $z\in[0,l]$ und für die Randtrajektorie gelte:
+\begin{align*}
+\bm(x)(z_0,\bullet)\in G_0(\Gamma) \quad \textrm{mit} \quad \sigma = \frac{\hat{m}}{\hat{m}-1}
+\end{align*}
+Dann exisitiert eine eindeutige Lösung der Cauchy'schen Randwertaufgabe zu \eqref{eq:4-11} mit Randbedingung bei $z=z_0$
+\end{satz}
+\begin{enumerate}
+\item Abschätzung der maximalen Gevrey-Ordnung sehr konservativ, häufig höhere Ordnungen möglich
+\item System der Form \begin{align}
+\pd{\bm{x}}{z}(z,t)=\sum_{j=0}^\beta A_j(z)\pd[j]{\bm{x}}{t^j}(z,t)
+\end{align}
+auf \eqref{eq:4-11} zurückführbar
+\item Bedingung für skalare Gleichungen der Form
+\begin{align} \label{eq:4-12}
+\pd[n]{x}{z^n}(z,t)=\sum_{i+\sigma_j<n}a_{i,j}(z)\pd[i]{}{z^i}\pd[i]{x}{t^i}(z,t)
+\end{align}
+$\sigma>1$ Randtrajektorien aus $G_\sigma(\Omega)$
+\end{enumerate}
+Wenn wir die Vorgaben auf dem Rand entsprechender Gevrey-Ordnung wählen, gibt es eine Lösung
+\subsubsection{Numerische Berechnung der Lösung}
+\paragraph{Lösung durch Iteration}
+Integration von \eqref{eq:4-12}:
+\begin{align*}
+\bm{x}(z,t)=\bm{x}(z_0,t)+\sum_{j=0}^\beta \int_{z_0}^z A_j(\tilde{z})\pd[j]{\bm{x}}{t^j}(\tilde{z},t)\d \tilde{z}
+\end{align*}
+\paragraph{Lösung als Grenzwert:} 
+\begin{align*}
+\bm{x}(z,t) = \lim_{k \rightarrow \infty}{\bm{x}_k(z,t)}
+\end{align*}
+der Iteration:
+\begin{align*}
+\bm{x}_{k+1}(z,t)=\bm{x}_k(z_0,t)+\sum_{j=0}^\beta \int_{z_0}^z A_j(\tilde{z})\pd[j]{\bm{x}_k}{t^j}(\tilde{z},t)\d \tilde{z}
+\end{align*}
+\textcolor{red}{Vorsicht !} Zur Berechnung von $\bm{x}_{k+1}(z,t)$ werden Zeitableitungen von $\bm{x}_{k}(z,t)$ benötigt. Da $k \rightarrow \infty$, hängt Lösung von Ableitungen der Randtrajektorie $\bm{x}(z_0,t)$ beliebig hoher Ordnung ab!
+\paragraph{Potenzreihenansatz}
+Ansatz für $\bm{x}_{k}(z,t)=\sum_{i=0}^kC_i(t)\frac{(z-z_0)^i}{i!}$ und $C_0(t)=\bm{x}(z_0,t)$. Einsetzen in \eqref{eq:4-12} liefert \[ C_k(z,t) = \sum_{j=0}^\beta A_j C_{k-1}^{(j)}(t) \]
+Diskretisierung von \eqref{eq:4-12} liefert:
+\begin{align*}
+\bm{x}(z+\Delta z,t)=\bm{x}(z,t)+\Delta z \sum_{j=0}^{j} A_j(z)\pd[j]{\bm{x}}{t^j}(z,t)
+\end{align*}
+In die Lösung gehen prinzipiell beliebig hohe Zeitableitungen der Randtrajektorie ein. Je nach Güte der Approximation (Anzahl der Iterationen, Index für Reihenabbruch, Größe von $\Delta z$) muss nur eine entsprechende (endl.) Anzahl von Ableitungen der Randtrajektorie des flachen Ausgangs berechnet werden.
+\begin{bsp}{Wärmeleitung}
+\begin{align*}
+\pd{x}{t}(z,t)=\pd[2]{x}{z^2}(z,t) \quad x - \textrm{Temperatur}, z \in [0,1]
+\end{align*}
+$x(0,t)=y(t)$ entspricht flachem Ausgang, $\pd{x}{z}(0,t)=0$ ideale Isolierung und Heizer bei $z=1$: $\pd{x}{z}(1,t)=f(x(1,t),u(t))$. Rand vollständig aktuiert. \begin{align*}
+x(z,t) = \sum_{i=0}^\infty C_i(t) \frac{z^i}{i!} & \qquad \pd{x}{t}(z,t) = \sum_{i=0}^\infty \dot{C}_i(t) \frac{z^i}{i!} \\
+\pd{x}{z}(z,t) = \sum_{i=0}^\infty C_{i+1}(t) \frac{z^{i}}{i!} & \qquad \pd[2]{x}{z^2}(z,t) = \sum_{i=0}^\infty C_{i+2}(t) \frac{z^{i}}{i!} \\
+\end{align*}
+in pDgl. eingesetzt:
+\begin{align*}
+\sum_{i=0}^\infty \dot{C}_i(t) \frac{z^i}{i!} = \sum_{i=0}^\infty C_{i+2}(t) \frac{z^{i}}{i!}
+\end{align*}
+Initialisierung über Randbedingung $x(0,t)=y(t) \Rightarrow \boxed{C_0(t)=y(t)}$ und $\pd{x}{z}(0,t)=0 \Rightarrow \boxed{C_1(t)=0}$
+\begin{align*}
+C_2(t)=\dot{y}(t) \quad (i=0) \\
+C_3(t)=0 \quad (i=1) \\
+C_4(t)=\ddot{y}(t) \quad (i=2) \\
+\end{align*}
+$x(z,t)=\sum_{i=0}^\infty y^{(i)}(t)\frac{z^{2i}}{(2i)!}$
+
+Stellgröße bei $z = 1$:
+\begin{align*}
+x(1,t)=\sum_{i=0}^\infty \frac{y^{(i)}(t)}{(2i)!} \\
+\pd{x}{z}(z,t) = \sum_{i=0}^\infty y^{(i+1)}(t)\frac{z^{2i+1}}{(2i+1)!} \\
+\pd{x}{z}(1,t) = \sum_{i=0}^\infty \frac{y^{(i+1)}(t)}{(2i+1)!}
+\end{align*}
+Diese Lösungen können nun in $\pd{x}{z}(1,t)=f(x(1,t),u(t))$ eingesetzt werden um $u(t)$ zu erhalten.
+\end{bsp}
+
+
