@@ -1,0 +1,133 @@
+\newpage
+\section{Methode der Modaltransformation}
+\setcounter{equation}{0}
+\subsection{Einführung und Motivation}
+Worum geht es? 
+\begin{itemize}
+\item lineare Randwertaufgabe 
+	\subitem Darstellung der Lösung als verallgemeinerte Fourierreihe bezüglich des Ortes
+\item Koeffizienten der Fourierreihe
+	\subitem genügen linearen gewöhnlichen Dgl.
+\item Approximation der Randwertaufgabe durch Reihenabbruch
+	\subitem \emph{early lumping} $\rightarrow$ Untersuchung und Entwurf auf ortsdiskretem Modell
+\item[$\Rightarrow$] gewöhnliches Dgl. System (pro Koeffizient eine Dgl.)
+	\subitem nutzbar für Simulation und Untersuchungen zu Stabilität, Steuerbarkeit, etc. 
+\end{itemize}
+\paragraph{Wärmeleiter}
+\begin{align*}
+&\pd[2]{x}{z^2}(z,t)+\pd{x}{t}(z,t)-\alpha(x(z,t)-T_u(t))=0 \\
+\textrm{Randbed.: } & \pd{x}{z}(0,t) = 0 \quad \pd{x}{z}(1,t) = u(t) \\
+& x \hat{=} \textrm{ Temperatur}
+\end{align*}
+\paragraph{Operatorformulierung}
+\begin{align*}
+&x^*(t)=x(\cdot,t) \quad u^*(t) = \begin{pmatrix} u(t) \\ T_u(t) \end{pmatrix} \\
+&\dot{x}^*(t) = Ax^*(t)+Bu^*(t) \quad Rx^*(t)=R_u u^*(t)\\
+&\textrm{mit} \\
+&Ax^*(t) = \pd[2]{x}{z^2}(\cdot,t)-\alpha x(\cdot,t) \quad B = \begin{pmatrix}0 & \alpha\end{pmatrix} \\
+&\textrm{und} \\
+&Rx^*(t) = \begin{pmatrix} \pd{x}{z}(0,t) \\ \pd{x}{z}(1,t) \end{pmatrix} \quad R_u = \begin{pmatrix}  0 & 0 \\ 1 & 0\end{pmatrix}
+\end{align*}
+\paragraph{Diagonalisierung gewöhnlicher Dgl.}
+
+Ausgangspunkt:
+\begin{subequations}
+\label{eq:5-1}
+\begin{align}
+&D_tx(t) = Ax(t)+Bu(t) &x \in \R^n, u \in \R^m \\
+&D_t := \frac{\d^\gamma}{\d t^\gamma}+ \sum_{i=0}^{\gamma-1}c_i\frac{\d^i}{\d t^i} \quad c_i \in \R
+\end{align}
+\end{subequations}
+Annahme: $A$ diagonalisierbar (Eigenvektoren von $A$ spannen den $\R^n$ auf)
+\begin{align*}
+\Lambda = T^{-1}AT = \textrm{diag}(\lambda_1,...,\lambda_n), \quad x=T\bar{x}, \bar{x}=T^{-1}x \\
+D_t\bar{x}(t)= \Lambda\bar{x}(t)+\bar{B}u(t) \quad \bar{B} = TB
+\end{align*}
+Dies führt auf System entkoppelter Dgl. in den Komponenten von $\bar{x}$
+
+Erinnerung: 
+\begin{itemize}
+\item Spalten $r_1,...,r_n$ von $T$ sind Rechtseigenvektoren von $A$
+
+\item Zeilen $l_1^\textrm{T}, ..., l_n^\textrm{T}$ von $T$ sind Linkseigenvektoren von $A$
+\end{itemize}
+Eigenwertaufgaben
+
+$Ar_i = \lambda_i r_i \quad A^\textrm{T} = \lambda_i l_i \quad i=1,...,n$ 
+
+Orhtogonalität:
+$\left\langle l_i, r_j \right\rangle = \begin{cases}1 \quad i=j \\ 0 \quad i \neq j \end{cases}$
+
+Transformation $x=T\bar{x}$ entspricht Darstellung von $x$ als Linearkombination der Rechts-Eigenvektoren von $A$:
+\begin{align}
+\label{eq:5-2}
+x(t) = \sum_{i=1}^{n}\bar{x}_i(t)r_i
+\end{align}
+\paragraph{Interpretation der Entkopplung}
+Ausgangspunkt System \eqref{eq:5-1}
+
+Einsetzen der Zerlegung \eqref{eq:5-2} in \eqref{eq:5-1} und skalare Mutliplikation mit Links-Eigenvektoren:
+\begin{align*}
+\sum_{i=1}^{n}D_t\bar{x}_i(t)\left\langle l_j, r_i \right\rangle = \sum_{I=1}^{n}\bar{x}_i(t) \left\langle l_j, Ar_i \right\rangle + \left\langle l_j, Bu \right\rangle \quad j=1,...,n
+\end{align*}
+Ausnutzen der Orthogonalität und $Ar_i = \lambda r_i$ liefert:
+\begin{align*}
+&D_t\bar{x}_i(t)= \lambda_i \bar{x}_i(t) + \sum_{j=1}^{m}\bar{b}_{ij}u_j(t) \quad i=1,...,n \\
+& u = (u_1,...,u_m)^\textrm{T}, B=(b_1,...,b_m), \bar{b}_{ij} = \left\langle l_i, b_j \right\rangle
+\end{align*}
+\paragraph{Modaltransformation im endlichdimensionalen}
+
+Koordinatenvektor $\bar{x}=(x_1,...,x_n)^\textrm{T} \in \R$
+Transformation $x_i^*=\left\langle r_i, x \right\rangle i = 1,...,n$ liefert \emph{neue Koordinaten} $\underbrace{x^*=(x_1^*,...x_n^*)}_{\textrm{modale Koord.}} \in \R^n$ bzgl. der Basis $r_1,...,r_n$.
+\begin{align*}
+\dot{x}^*_1 &= \lambda_1 x_1^* +f_1(u) \\
+\dot{x}^*_2 &= \lambda_2 x_2^* +f_2(u) \\
+&\vdots \\
+\dot{x}^*_n &= \lambda_n x_n^* +f_n(u) \\
+\end{align*}
+Möglichkeit zur Approximation: Berücksichtigung von $n*<n$ akalaren Dgl., z.B., um nur die langsamen Vorgänge zu untersuchen.
+\subsection{Funktionaloperatoren und abstrakte Dgl.}
+Ziel: Randwertaufgabe so formulieren, wie im örtlich konzentrierten Fall
+\begin{align*}
+D_tx(t) = Ax(t) + Bu(t)
+\end{align*}
+Was ist dann $x(t)$? Wo ist $z$-Abhängigkeit?
+
+Alternative Interpretation von $x(z,t)$:
+\begin{itemize}
+\item verteilte Systemvariablen sind ortsabhängige Funktionen aus einem Funktionenraum $\mathcal{H}$, keine reellen Zahlen.
+
+
+\item  Einträge von $x(t)$ können jetzt Funktionen sein
+\subitem $x(t) = x(\cdot,t) \hat{=}$ $z$-abh. Funktion $x(t)(z)$.
+
+\item $x(t) \in \mathcal{X} = \mathcal{H}^{n1} \times \R^{n2}$ 
+
+\item $n1$ Fkt. $x_1(\cdot,t),...,x_{n1}(\cdot,t)$
+\item $n2$ reelle Zahlen $\xi_1(t),...,\xi_{n2}(t)$, so dass
+
+\item $x(t) = (x_1(\cdot,t),...,x_{n1}(\cdot,t),\xi_1(t),...,\xi_{n2}(t))$
+\end{itemize}
+Allgemeine Operatoren:
+\begin{itemize}
+\item $A:X\mapsto X, B:\R^m \mapsto X$
+\item $A,B$ lineare Abbildungen, allgemeiner als Matrizen. 
+\end{itemize}
+Bsp. für Funktionenräume:
+\begin{itemize}
+\item stetige Funktionen $C([a,b],\mathbb{K})$ im Intervall $[a,b]$ auf dem stetige Fkt. mit Werten aus dem Körper $\mathbb{K}$ definiert sind
+\end{itemize}
+Bsp. für lineare Abbildungen in Funktionenräumen:
+\begin{itemize}
+\item gewichtete Integration $y(z) = \int_\Omega g(z,\xi)x(\xi) \d \xi$  (Funktion $\rightarrow$ Funktion)
+\item Multiplikation mit Gewichtsfkt. $y(z)=g(z)x$ (Zahl $\rightarrow$ Funktion)
+\end{itemize}
+\subsection{Adjungierter Funktionaloperator}
+\subsubsection{Innenprodukt (Skalarprodukt) im $\mathbf{C}^n$}
+\begin{align*}
+\left\langle \bm{x},\bm{y} \right\rangle = \sum_{i=1}^{n}x_i\bar{y}_i \qquad \textrm{mit }\bm{x}=(x_1,...,x_n)^\textrm{T},\bm{y}=(y_1,...,y_n)^\textrm{T}
+\end{align*}
+Eigenschaften des Skalarproduktes
+\begin{enumerate}
+\item bilinear
+\end{enumerate}
