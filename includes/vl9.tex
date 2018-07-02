@@ -1,0 +1,100 @@
+\newpage
+\subsubsection{Abstrakte Dgl. für skalare Randwertaufgabe}
+Abstrakte Dgl. für $\bm{x}(t):= \bm{x}(\cdot,t)$
+\begin{align*}
+& D_t \bm{x}(t) = A \bm{x}(t) + B \bm{u}(t) (4a)\\
+& \bm{x}(t) \in \underbrace{\mathbf{H}([a,b],\R)}_{\bm{x}(t) \textrm{aus Fkt.raum}}, 
+\underbrace{u(t) \in \R}_{\textrm{reelle Zahl}} \\
+& \textrm{mit den Operatoren} \\
+& D_t \bm{x}(t) = \frac{\d^\gamma \bm{x}}{\d t^\gamma}+ \sum_{i=0}^{\gamma-1}c_i\frac{\d^i \bm{x}}{\d t^i} (4b)\\
+& A \bm{x} = \sum_{i=0}^\alpha a_i(\cdot)\pd[i]{\bm{x}}{z^i}(\cdot,t) \quad c_0,...,c_{\lambda-1} \in \R \textrm{ konst. }
+\quad a_0,...,a_\alpha \textrm{ hinreichend glatt }, |a_\alpha(z)|>0
+\end{align*}
+Weil $\bm{x}(t)$ eine Funktion ist, heißt die Dgl. abstrakt.
+
+Randoperator:
+\begin{align*}
+(R\bm{x})(t) = R_u u(t) (5a) \\
+\textrm{mit } R \bm{x} = (R_1\bm{x},...,R_\alpha \bm{x})^\textrm{T} \\
+(R_i\bm{x}) = \sum_{j=0}^{\alpha-1}\left(r_{0,i,j}\pd[j]{\bm{x}}{z^j}(0,t)+r_{l,i,j}\pd[j]{\bm{x}}{z^j}(l,t) \right) (5b) \\
+R_u =(r_{u,1},...,r_{u,\alpha})^\textrm{T} \in \R^\alpha
+\end{align*}
+\subsection{Adjungierter Funktionaloperator}
+\subsubsection{Innenprodukt (Skalarprodukt) (im $\mathbb{C}^n$)}
+\begin{align*}
+\left\langle \bm{x},\bm{y} \right\rangle = \sum_{i=1}^{n}x_i\bar{y}_i \qquad \textrm{mit }\bm{x}=(x_1,...,x_n)^\textrm{T} \in \mathbb{C}^n,\bm{y}=(y_1,...,y_n)^\textrm{T} \in \mathbb{C}^n
+\end{align*}
+Eigenschaften des Skalarproduktes
+\begin{enumerate}
+\item bilinear 
+\begin{align*}
+\langle x_1+x_2,y \rangle =\langle x_1,y \rangle +\langle x_2,y \rangle \\
+\langle x,y_1+y_2 \rangle =\langle x,y_1 \rangle +\langle x,y_2 \rangle \\
+\langle \alpha x,y \rangle =\alpha \langle x,y\rangle  = \langle x,\bar{\alpha}y\rangle \qquad \alpha \in \mathbb{K}
+\end{align*}
+\item kommutativ
+\begin{align*}
+\langle  x,y \rangle =\bar{\langle  x,y \rangle} 
+\end{align*}
+\item positiv definit
+\begin{align*}
+\langle  x,x \rangle > 0 \quad \forall x \neq 0 \\
+\langle  \vec{0},\vec{0} \rangle = 0 
+\end{align*}
+\end{enumerate}
+\begin{defi}[Skalarprodukt] Sei 
+mit den Eigenschaften 1-3 heißt \textcolor{red}{Innenprodukt auf $X$}
+\end{defi}
+\begin{bsp} gewichtetes Innenprodukt $\in \mathbb{C}^n(\R^n)$
+\begin{align*}
+\langle x, y \rangle : = \sum_{i=1}^n \gamma_i x_i \bar{y}_i \qquad \gamma_i > 0
+\end{align*} 
+Gewichtetes Inneprodukt im Raum $H$ der auf $[0,l]$ definierten komplexwertigen Funktionen:
+\begin{align*}
+\langle x, y \rangle : = \int_{0}^l g(z)x(z)\bar{y}(z) \d z \qquad g(z) > 0
+\end{align*} 
+\end{bsp}
+\subsubsection{Adjungierter Differentialoperator}
+Erinnerung(endlichdim. Fall): linearer Operator (Matrix)
+\begin{align*}
+A: \R^n \mapsto R^n
+\end{align*}
+Standardskalarprodukt in Matrixschreibweise $\langle x, y \rangle = y^\textrm{T} x  $
+\begin{align*}
+\langle Ax, y \rangle &= y^\textrm{T} (Ax) \\&= ( y^\textrm{T} A)x \\&=  ( A^\textrm{T} y)^\textrm{T}x \\& = \langle x, A^\textrm{T} y \rangle
+\end{align*}
+Verallgemeinerung auf Funktionaloperatoren: Adjungierter Operator übernimmt die Rolle von $A^\textrm{T}$
+
+Besonderheit hier: Differentialoperator $A$ und Randoperator $R$ werden als Einheit aufgefasst.
+\begin{defi}Sei $X$ ein Innneproduktraum. Der \textcolor{red}{Operator $/A^*,R^*)$} heißt der zu \textcolor{red}{$(A,R)$ adjungierte Operator} wenn $\forall x \in X$ mit $Rx=0$ und genau alle $x \in X$ mit $R^*y=0$ gilt.
+\begin{align}
+\label{eq:5-6}
+\langle Ax,y \rangle = \langle x,A^* y \rangle (6)
+\end{align}
+Dabei darf \eqref{eq:5-6} für kein $y$ mit $R^*y \neq 0$ gelten. Falls $R= R^*, A = A^* \Rightarrow$ \textcolor{red}{selbstadjungierter Operator} $\hat{=}$ symm. Matrizen
+\end{defi}
+Bestimmung des Adjungierten Differentialoperators
+\begin{align*}
+A\bm{x} &= \sum_{i=0}^\alpha a_i(\cdot)\pd[i]{\bm{x}}{z^i} \\
+R \bm{x} &= \sum_{i=0}^{\alpha-1}r_{0,i,j} \pd[i]{\bm{x}}{z^i}(0)+r_{l,i,j} \pd[j]{\bm{x}}{z^j}(l)
+\end{align*}
+\begin{enumerate}
+\item Skalare Multiplikation von $Ax$ mit $y$
+\begin{align*}
+\langle A x , y \rangle &=  \int_0^l\bar{y}(z)(Ax)(z) \d z \\
+ &= \int_0^l\bar{y}(z)\sum_{i=0}^\alpha a_i(z)\pd[i]{\bm{x}}{z^i} (z) \d z
+\end{align*}
+\item Elimination der Ableitungen der verteilten Größen durch (ggf. mehrfache) partielle Integration (es entstehen zusätzliche Randausdrücke)
+\begin{align*}
+\langle A x , y \rangle = \sum_{i=0}^\alpha \left[ \sum_{j=0}^{i-1}(-1)^j \pd[j]{}{z^j}(a_i(z)\bar{y}(z))\pd[i-j-1]{x}{z^{i-j-1}}(z) \right]_0^l + \underbrace{\int_0^l \sum_{i=0}^\alpha (-1)^i \left( \pd[i]{}{z^i} a_i(z) \bar{y}(z)\right)x(z) \d z}_{=: \langle x , A^* y \rangle}
+\end{align*}
+Es gilt
+\begin{align*}
+Ay^* = \sum^\alpha_{i=0}\sum^i_{j=0}(-1)^i \binom{i}{j} \bar{a}_i^{(i-j)} \pd[j]{y}{z^j}
+\end{align*}
+Umsortieren und Zusammenfassen:
+\begin{align*}
+& A^*y = \sum^\alpha_{i=0}a_i^*(z) \pd[i]{y}{z^i} \\
+\textrm{mit } & a_i^*(z) =  \sum_{j=i}^\alpha (-1)^j \binom{j}{i} \bar{a}_j^{j-1}(z)
+\end{align*}
+\end{enumerate}
